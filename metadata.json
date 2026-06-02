@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "Quiz de Escala Estratégica",
   "description": "Um quiz de diagnóstico premium para infoprodutoras e mentoras descobrirem o nível de prontidão estrutural de seu produto para escala.",
+=======
+  "name": "Digitalflly - Conexões",
+  "description": "Portfólio de links oficial da Digitalflly. Conecte-se conosco e agende sua contratação de conteúdo em instantes.",
+>>>>>>> b4a3343a206ffe6eae31a4f0c2d1198573fa57b9
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
