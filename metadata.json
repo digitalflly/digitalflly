@@ -1,0 +1,6 @@
+{
+  "name": "Quiz de Escala Estratégica",
+  "description": "Um quiz de diagnóstico premium para infoprodutoras e mentoras descobrirem o nível de prontidão estrutural de seu produto para escala.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
