@@ -1,0 +1,6 @@
+{
+  "name": "Digitalflly - Conexões",
+  "description": "Portfólio de links oficial da Digitalflly. Conecte-se conosco e agende sua contratação de conteúdo em instantes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
