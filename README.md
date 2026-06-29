@@ -1,20 +1,50 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Digitalflly · Conexões e Conteúdo
 
-# Run and deploy your AI Studio app
+Página de links (Linktree-style) da Digitalflly. É um **site estático puro** — HTML + CSS,
+sem build e **sem JavaScript externo**. A página carrega instantânea, sem depender de
+nenhum CDN de runtime (React/Babel/unpkg).
 
-This contains everything you need to run your app locally.
+## Estrutura
 
-View your app in AI Studio: https://ai.studio/apps/e7d16e79-3d4f-4c77-ba5f-bdf9fea2f361
+```
+index.html      → a página inteira (HTML + CSS embutido)
+assets/         → imagens (cabeçalho e capa do botão)
+vercel.json     → configuração de deploy estático
+```
 
-## Run Locally
+## Rodar localmente
 
-**Prerequisites:**  Node.js
+Não há build. Sirva os arquivos por HTTP (ou abra o `index.html` direto no navegador):
 
+```bash
+npx serve .
+# ou
+python3 -m http.server 3000
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Depois acesse http://localhost:3000
+
+## Editar conteúdo
+
+Tudo está em `index.html`:
+
+- **Link do WhatsApp:** atributo `href` do `<a class="link-card">`.
+- **Imagens:** `assets/cabecalho.png` (topo) e `assets/capa-conteudo.png` (botão).
+- **Instagram / e-mail:** `href` dos `<a class="social-btn">`.
+- **Cores:** `#28140d` (fundo) e `#f5ebd6` (texto) no `<style>`.
+
+## Deploy no Vercel (configuração recomendada)
+
+Em **Project → Settings → Build and Deployment**:
+
+| Configuração      | Valor                   |
+| ----------------- | ----------------------- |
+| Framework Preset  | **Other** (Nenhum)      |
+| Build Command     | *(vazio / desligado)*   |
+| Output Directory  | *(vazio — usa a raiz)*  |
+| Install Command   | *(vazio / desligado)*   |
+| Root Directory    | `./`                    |
+
+O `vercel.json` já fixa `framework: null` e desliga o build, além de aplicar cache
+longo nas imagens (`/assets/*`). Como **não há `package.json`**, o Vercel publica
+os arquivos estáticos diretamente, sem etapa de build.

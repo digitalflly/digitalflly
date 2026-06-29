@@ -1,12 +1,133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Digitalflly | Conexões e Conteúdo</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digitalflly | Conexões e Conteúdo</title>
+  <meta name="description" content="Conecte-se com a Digitalflly e contrate nossos serviços de conteúdo.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background-color: #28140d;
+      color: #f5ebd6;
+      font-family: 'Poppins', 'Inter', ui-sans-serif, system-ui, sans-serif;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(255,255,255,0.10); }
+
+    @keyframes fllyUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fllyFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .wrap { min-height: 100vh; width: 100%; overflow-x: hidden; }
+    .page {
+      position: relative; max-width: 672px; margin: 0 auto; padding: 64px 24px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .header {
+      width: 118%; margin: 0 -9% 16px; user-select: none;
+      animation: fllyUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .header img { display: block; width: 100%; height: auto; }
+
+    .links { width: 100%; display: flex; flex-direction: column; gap: 24px; }
+    .link-card {
+      display: block; position: relative; overflow: hidden; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease; text-decoration: none;
+      animation: fllyUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .link-card:hover  { background: rgba(255,255,255,0.08); transform: scale(1.02); }
+    .link-card:active { transform: scale(0.98); }
+    .link-card .ratio { width: 100%; aspect-ratio: 897 / 282; }
+    .link-card .ratio img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .link-card .overlay {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to top, rgba(40,20,13,0.4), transparent);
+    }
+
+    .foot {
+      margin-top: 64px; display: flex; flex-direction: column; align-items: center;
+      gap: 32px; width: 100%; animation: fllyFade 0.8s ease 0.6s both;
+    }
+    .socials { display: flex; gap: 24px; }
+    .social-btn {
+      display: flex; padding: 12px; border-radius: 9999px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(245,235,214,0.9); transition: background 0.25s ease;
+    }
+    .social-btn:hover { background: rgba(255,255,255,0.12); }
+
+    .top-btn {
+      display: flex; align-items: center; gap: 8px; background: none; border: none;
+      padding: 0; font-family: inherit; color: rgba(245,235,214,0.4); font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.2em; cursor: pointer;
+      transition: color 0.25s ease;
+    }
+    .top-btn:hover { color: rgba(245,235,214,1); }
+
+    footer { text-align: center; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
+    footer p { margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(245,235,214,0.3); }
+    footer p.sub { margin-top: 8px; color: rgba(245,235,214,0.2); }
+    footer p.sub span { color: rgba(245,235,214,0.4); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="page">
+
+      <div class="header">
+        <img src="assets/cabecalho.png" alt="Seja bem-vinda (o) — abaixo você vai encontrar todos os nossos serviços" referrerpolicy="no-referrer">
+      </div>
+
+      <div class="links">
+        <a class="link-card"
+           href="https://api.whatsapp.com/send?phone=5534991750918&amp;text=oii%2C%20quero%20contratar%20o%20servi%C3%A7o%20de%20conte%C3%BAdo!"
+           target="_blank" rel="noopener noreferrer">
+          <div class="ratio">
+            <img src="assets/capa-conteudo.png" alt="Contratar Conteúdo" referrerpolicy="no-referrer">
+          </div>
+          <div class="overlay"></div>
+        </a>
+      </div>
+
+      <div class="foot">
+        <div class="socials">
+          <a class="social-btn" href="https://www.instagram.com/digitalflly/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a class="social-btn" href="mailto:atendimento@digitalflly.com" aria-label="E-mail">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          </a>
+        </div>
+
+        <button class="top-btn" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          <span>Voltar ao topo</span>
+        </button>
+
+        <footer>
+          <p>Todos os direitos reservados • Política de Privacidade</p>
+          <p class="sub">Site feito com carinho por <span>@digitalflly</span></p>
+        </footer>
+      </div>
+
+    </main>
+  </div>
+</body>
 </html>
