@@ -1,20 +1,46 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Digitalflly · Conexões e Conteúdo
 
-# Run and deploy your AI Studio app
+Página de links (Linktree-style) da Digitalflly. É um **site estático** — não precisa de build.
+A página é renderizada no navegador pelo runtime `support.js`, que carrega React 18 + Babel
+sob demanda e monta o template `<x-dc>` definido em `index.html`.
 
-This contains everything you need to run your app locally.
+## Estrutura
 
-View your app in AI Studio: https://ai.studio/apps/e7d16e79-3d4f-4c77-ba5f-bdf9fea2f361
+```
+index.html      → página (template <x-dc> + dados/props)
+support.js      → runtime que renderiza o template
+assets/         → imagens (cabeçalho e capa do botão)
+vercel.json     → configuração de deploy estático
+```
 
-## Run Locally
+## Rodar localmente
 
-**Prerequisites:**  Node.js
+Como não há build, basta servir os arquivos por HTTP (não abra via `file://`,
+o runtime precisa de um servidor):
 
+```bash
+npx serve .
+# ou
+python3 -m http.server 3000
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Depois acesse http://localhost:3000
+
+## Deploy no Vercel (configuração recomendada)
+
+Em **Project → Settings → Build & Deployment**:
+
+| Configuração         | Valor                        |
+| -------------------- | ---------------------------- |
+| Framework Preset     | **Other** (Nenhum)           |
+| Build Command        | *(vazio / desligado)*        |
+| Output Directory     | *(vazio — usa a raiz)*       |
+| Install Command      | *(vazio / desligado)*        |
+| Root Directory       | `./`                         |
+
+O `vercel.json` deste repositório já fixa `framework: null` e desliga o build,
+além de aplicar cache longo nas imagens (`/assets/*`). Como **não há `package.json`**,
+o Vercel publica os arquivos estáticos diretamente, sem etapa de build.
+
+> Editar o número de WhatsApp / cores: ver o bloco `data-props` e `renderVals()`
+> no final do `index.html`.
