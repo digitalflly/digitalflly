@@ -1,22 +1,20 @@
 # Digitalflly · Conexões e Conteúdo
 
-Página de links (Linktree-style) da Digitalflly. É um **site estático** — não precisa de build.
-A página é renderizada no navegador pelo runtime `support.js`, que carrega React 18 + Babel
-sob demanda e monta o template `<x-dc>` definido em `index.html`.
+Página de links (Linktree-style) da Digitalflly. É um **site estático puro** — HTML + CSS,
+sem build e **sem JavaScript externo**. A página carrega instantânea, sem depender de
+nenhum CDN de runtime (React/Babel/unpkg).
 
 ## Estrutura
 
 ```
-index.html      → página (template <x-dc> + dados/props)
-support.js      → runtime que renderiza o template
+index.html      → a página inteira (HTML + CSS embutido)
 assets/         → imagens (cabeçalho e capa do botão)
 vercel.json     → configuração de deploy estático
 ```
 
 ## Rodar localmente
 
-Como não há build, basta servir os arquivos por HTTP (não abra via `file://`,
-o runtime precisa de um servidor):
+Não há build. Sirva os arquivos por HTTP (ou abra o `index.html` direto no navegador):
 
 ```bash
 npx serve .
@@ -26,21 +24,27 @@ python3 -m http.server 3000
 
 Depois acesse http://localhost:3000
 
+## Editar conteúdo
+
+Tudo está em `index.html`:
+
+- **Link do WhatsApp:** atributo `href` do `<a class="link-card">`.
+- **Imagens:** `assets/cabecalho.png` (topo) e `assets/capa-conteudo.png` (botão).
+- **Instagram / e-mail:** `href` dos `<a class="social-btn">`.
+- **Cores:** `#28140d` (fundo) e `#f5ebd6` (texto) no `<style>`.
+
 ## Deploy no Vercel (configuração recomendada)
 
-Em **Project → Settings → Build & Deployment**:
+Em **Project → Settings → Build and Deployment**:
 
-| Configuração         | Valor                        |
-| -------------------- | ---------------------------- |
-| Framework Preset     | **Other** (Nenhum)           |
-| Build Command        | *(vazio / desligado)*        |
-| Output Directory     | *(vazio — usa a raiz)*       |
-| Install Command      | *(vazio / desligado)*        |
-| Root Directory       | `./`                         |
+| Configuração      | Valor                   |
+| ----------------- | ----------------------- |
+| Framework Preset  | **Other** (Nenhum)      |
+| Build Command     | *(vazio / desligado)*   |
+| Output Directory  | *(vazio — usa a raiz)*  |
+| Install Command   | *(vazio / desligado)*   |
+| Root Directory    | `./`                    |
 
-O `vercel.json` deste repositório já fixa `framework: null` e desliga o build,
-além de aplicar cache longo nas imagens (`/assets/*`). Como **não há `package.json`**,
-o Vercel publica os arquivos estáticos diretamente, sem etapa de build.
-
-> Editar o número de WhatsApp / cores: ver o bloco `data-props` e `renderVals()`
-> no final do `index.html`.
+O `vercel.json` já fixa `framework: null` e desliga o build, além de aplicar cache
+longo nas imagens (`/assets/*`). Como **não há `package.json`**, o Vercel publica
+os arquivos estáticos diretamente, sem etapa de build.
